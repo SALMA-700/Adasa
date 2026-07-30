@@ -1,0 +1,9 @@
+.main-btn  i{
+    transition: all 0.5s !important;
+}
+.main-btn:hover i{
+    /* margin-right: 15px; */
+    position: relative;
+    left:-5px !important;
+
+}
