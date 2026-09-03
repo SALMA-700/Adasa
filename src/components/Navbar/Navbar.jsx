@@ -68,7 +68,7 @@ export default function Navbar() {
               <li className="mx-1">
                 <NavLink
                   to="/"
-                  className="block py-2 px-3  text-gray-400 rounded-3xl md:bg-transparent md:hover:text-white"
+                  className="block py-2 px-3  text-gray-400 rounded-4xl md:bg-transparent md:hover:text-white"
                   aria-current="page"
                 >
                   الرئيسية
@@ -77,7 +77,7 @@ export default function Navbar() {
               <li className="mx-1">
                 <NavLink
                   to="blog"
-                  className="block py-2 px-3 text-gray-400 rounded-3xl hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-white  md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-gray-400 rounded-4xl hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-white  md:dark:hover:bg-transparent"
                 >
                   المدونة
                 </NavLink>
@@ -85,7 +85,7 @@ export default function Navbar() {
               <li className="mx-1">
                 <NavLink
                   to="who"
-                  className="block py-2 px-3 text-gray-400 rounded-3xl hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-white  md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-gray-400 rounded-4xl hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-white  md:dark:hover:bg-transparent"
                 >
                   من نحن
                 </NavLink>
