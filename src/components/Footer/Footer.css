@@ -69,16 +69,24 @@
 }
 li{
     transition: all 0.5s ;
+    cursor: pointer;
 }
 li:hover{
     color: #ff8c00;
+
 }
 li i{
-    display: none !important;
-    margin-left: 3px !important; 
-        transition: all 0.5s !important;
+    display: inline-block;
+    margin-left: 3px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
 
 }
 li:hover i{
-    display: inline-block !important;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+
 }

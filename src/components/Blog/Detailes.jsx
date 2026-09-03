@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import blogs from "../../posts.json";
-import { Link } from "react-router-dom";
-export default function Detailes({post:{image , title ,date ,category , readTime , content ,author , tags ,excerpt}}) {
-  
+import { useParams, Link } from "react-router-dom";
+
+export default function Detailes() {
+  const { id } = useParams();
+  const post = blogs.posts.find((p) => p.id === Number(id));
+  if (!post) return <div className="text-white p-10">المقال غير موجود</div>;
+
+  const { image, title, date, category, readTime, content, author, tags, excerpt } = post;
+
+  const sections = content.split(/\n\n##\s+/).map((chunk, i) => {
+    if (i === 0) return { id: "intro", label: "مقدمة", n: 0, body: chunk.trim() };
+    const [label, ...rest] = chunk.split("\n");
+    return { id: `section-${i}`, label: label.trim(), n: i, body: rest.join("\n").trim() };
+  });
 
   return (
     <>
@@ -16,9 +28,9 @@ export default function Detailes({post:{image , title ,date ,category , readTime
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
 
         <div className="absolute top-6 left-4 flex items-center gap-2 rounded-full bg-black/40 px-4 py-2 text-xs text-gray-300 backdrop-blur sm:left-6">
-         <Link to="home"> <i className="fa-solid fa-house" /></Link>
+         <Link to="/home"> <i className="fa-solid fa-house" /></Link>
           <i className="fa-solid fa-chevron-left text-[10px] opacity-60" />
-          <Link to="blog">المدونة</Link>
+          <Link to="/blog">المدونة</Link>
           <i className="fa-solid fa-chevron-left text-[10px] opacity-60" />
           <span className="font-semibold text-orange-400">{category}</span>
         </div>
@@ -62,14 +74,23 @@ export default function Detailes({post:{image , title ,date ,category , readTime
           {/* ---------- العمود الرئيسي ---------- */}
           <article className="min-w-0 space-y-10">
             <blockquote className="rounded-2xl border border-orange-500/40 bg-orange-500/5 px-6 py-5 text-lg font-semibold text-orange-300">
-              {excerpt}  </blockquote>
+              {excerpt}
+            </blockquote>
 
-            <p className="text-[15px] leading-8 text-gray-300">
-           {content.join("\n")}  </p>
-            <div  title="">
-              <p>
-              </p>
-            </div>
+            {sections.map((sec) => (
+              <div key={sec.id} id={sec.id} className="scroll-mt-24">
+                {sec.label !== "مقدمة" && (
+                  <h2 className="mb-3 flex items-center gap-2 text-2xl font-bold text-white">
+                    {sec.label}
+                    <span className="grid h-8 w-8 place-items-center rounded-lg bg-orange-500 text-white">
+                      <i className="fa-solid fa-camera text-sm" />
+                    </span>
+                  </h2>
+                )}
+                <p className="text-[15px] leading-8 text-gray-300">{sec.body}</p>
+              </div>
+            ))}
+
             <div className="flex flex-wrap items-center gap-3 border-t border-white/10 pt-6">
               <span className="grid h-9 w-9 flex-none place-items-center rounded-lg bg-orange-500 text-white">
                 <i className="fa-solid fa-tag text-sm" />
@@ -130,7 +151,7 @@ export default function Detailes({post:{image , title ,date ,category , readTime
                 </span>
               </div>
               <nav className="space-y-1">
-                {content.map((item) => (
+                {sections.map((item) => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
@@ -180,8 +201,7 @@ export default function Detailes({post:{image , title ,date ,category , readTime
         <section className="mt-16 border-t border-white/10 pt-10">
           <div className="mb-6 flex items-center justify-between">
             <Link
-          
-              to="blog"
+              to="/blog"
               className="flex items-center gap-2 text-sm text-orange-400 transition hover:text-orange-300"
             >
               عرض الكل
@@ -199,38 +219,44 @@ export default function Detailes({post:{image , title ,date ,category , readTime
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {blogs.map((post) => (
-              post.id<=4&&<article
-                key={post.title}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-orange-500/40"
-              >
-                <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={post.img}
-                    alt={post.title}
-                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                  />
-                  <span className="absolute top-3 right-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">
-                    بورتريه
-                  </span>
-                </div>
-                <div className="p-4">
-                  <h4 className="mb-3 font-bold leading-snug text-white">
-                    {post.title}
-                  </h4>
-                  <div className="flex items-center justify-between text-xs text-gray-400">
-                    <span>{post.time}</span>
-                    <span className="flex items-center gap-2">
-                      {post.author}
+            {blogs.posts.map((relatedPost) => (
+              relatedPost.id <= 4 &&
+              relatedPost.id !== post.id && (
+                <Link
+                  to={`/blog/detailes/${relatedPost.id}`}
+                  key={relatedPost.id}
+                  className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-orange-500/40"
+                >
+                  <article>
+                    <div className="relative h-44 overflow-hidden">
                       <img
-                        src={post.avatar}
-                        alt={post.author}
-                        className="h-6 w-6 rounded-full object-cover"
+                        src={relatedPost.image}
+                        alt={relatedPost.title}
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                       />
-                    </span>
-                  </div>
-                </div>
-              </article>
+                      <span className="absolute top-3 right-3 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">
+                        {relatedPost.category}
+                      </span>
+                    </div>
+                    <div className="p-4">
+                      <h4 className="mb-3 font-bold leading-snug text-white">
+                        {relatedPost.title}
+                      </h4>
+                      <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>{relatedPost.readTime}</span>
+                        <span className="flex items-center gap-2">
+                          {relatedPost.author.name}
+                          <img
+                            src={relatedPost.author.avatar}
+                            alt={relatedPost.author.name}
+                            className="h-6 w-6 rounded-full object-cover"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              )
             ))}
           </div>
         </section>

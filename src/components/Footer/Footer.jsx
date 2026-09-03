@@ -1,11 +1,5 @@
 import React from 'react'
 import "./Footer.css"
-//  import {
-//   FaYoutube,
-//   FaLinkedin,
-//   FaGithub,
-//   FaXTwitter,
-// } from "react-icons/fa6";
 export default function Footer() {
   return (
     <>
@@ -23,7 +17,7 @@ export default function Footer() {
           والتحديثات.
         </p>
         <input type="email" placeholder="أدخل بريدك الإلكتروني" className="w-full rounded-2xl bg-[#151515] border border-[#2d2d2d] px-5 py-4 outline-none focus:border-orange-500  focus:outline-0 ring-0" />
-        <button className="mt-5 w-full rounded-2xl bg-orange-500 py-4 font-bold hover:bg-orange-600 duration-300">
+        <button className="mt-5 w-full cursor-pointer rounded-2xl bg-orange-500 py-4 font-bold hover:bg-orange-600 duration-300">
           اشترك
         </button>
       </div> 
@@ -60,13 +54,13 @@ export default function Footer() {
           مهاراتكم.
         </p>
         <div className="flex gap-4 mt-8">
-          <a className="icon">
+          <a className="icon cursor-pointer">
             <i className='fa-brands fa-x'></i></a>
-          <a className="icon">
+          <a className="icon cursor-pointer">
             <i className='fa-brands fa-github'></i></a>
-          <a className="icon">
+          <a className="icon cursor-pointer">
             <i className='fa-brands fa-linkedin'></i></a>
-          <a className="icon">
+          <a className="icon cursor-pointer">
             <i className='fa-brands fa-facebook'></i></a>
         </div>
       </div>

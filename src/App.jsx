@@ -14,7 +14,7 @@ let router =createBrowserRouter([
     {index:true, element:<Home/>},
     { path: "home", element: <Home /> },
     {path:"blog" , element:<Blog/>, children:[
-      {path:"detailes" , element:<Detailes/>},
+      {path:"detailes/:id" , element:<Detailes/>},
       {index:true , element:<Artiacls/>}
     ]},
     {path:"who" , element:<Who/>},

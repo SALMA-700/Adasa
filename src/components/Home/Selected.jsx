@@ -1,13 +1,15 @@
 import React from "react";
 // import bg1 from "../../assets/card1.jpg"
-import { Link } from "react-router-dom";
 import blogs from "../../posts.json";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 export default function Selected() {
   const [blog, setBlog] = useState([]);
   useEffect(() => {
     setBlog(blogs.posts);
   }, []);
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="selected-articl  bg-[#0A0A0A]">
@@ -47,8 +49,7 @@ export default function Selected() {
               }) =>
                 id <= 3 && (
                   <div key={id}>
-                    <Link
-                      to="/"
+                  <div onClick={() => navigate(`/blog/detailes/${id}`)}
                       dir="rtl"
                       className="group duration-500  flex flex-col gap-5  bg-[#161616] pe-6 ps-0 py-0 hover:border-amber-600 hover:border  rounded-base shadow-xs my-7  md:flex-row md:max-w-full"
                     >
@@ -110,7 +111,7 @@ export default function Selected() {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 ),
             )}

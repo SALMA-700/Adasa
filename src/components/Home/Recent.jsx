@@ -37,11 +37,7 @@ export default function Recent() {
             </div>
           </div>
           <div className="grid  my-8  gap-8 md:grid-cols-2 sm:grid-cols-1  lg:grid-cols-3">
-              {blog.map((post) => (
-                post.id<=3&&<Link to="detailes">
-                <div 
-            className="overflow-hidden h-full  rounded-2xl bg-[#161616] border border-white/5 group transition-all duration-300 hover:-translate-y-2 hover:border-orange-400"
-          >
+              {blog.map((post) => ( post.id<=3&&<Link key={post.id} to={`/blog/detailes/${post.id}`}><div className="overflow-hidden h-full  rounded-2xl bg-[#161616] border border-white/5 group transition-all duration-300 hover:-translate-y-2 hover:border-orange-400">
             <div className="relative overflow-hidden">
               <img
                 src={post.image}
