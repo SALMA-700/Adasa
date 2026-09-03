@@ -16,7 +16,7 @@ export default function Navbar() {
             </span>
             <button
               type="button"
-              className="text-white hover:-translate-y-0.5 translate-0.5 transition-all bg-amber-600 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-12 rounded-3xl text-l px-8 py-0 focus:outline-none"
+              className="text-white hover:-translate-y-0.5 translate-0.5 transition-all bg-amber-600 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-12 rounded-4xl text-l px-8 py-0 focus:outline-none"
             >
               ابدا القراءة
             </button>
